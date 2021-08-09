@@ -1,14 +1,19 @@
 
-# sata.technology
+# signata.net
 
-This is the React project hosting website of the SATA airdrop, and will host the future Identity Marketplace.
+This is the React website for the Signata project.
 
-This site is deployed and available at [sata.technology](https://sata.technology).
+This site will be deployed and available at [signata.net](https://signata.net).
+
+## Install
+
+``` bash
+yarn
+```
 
 ## Development
 
 ``` bash
-yarn
 yarn start
 ```
 
@@ -19,5 +24,3 @@ If logged in to firebase, run the following to deploy to production:
 ``` bash
 yarn deploy
 ```
-
-Unlike the other CL projects there is no test instance deployed in parallel.
