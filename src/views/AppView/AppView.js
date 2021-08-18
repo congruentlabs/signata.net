@@ -2,14 +2,18 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { colors, Divider } from '@material-ui/core';
 import { Section, SectionAlternate } from 'components/organisms';
-// import {
-//   Download,
-//   Hero,
-//   SubHero,
-//   Token,
-//   Pricings,
-//   OpenSource,
-// } from './components';
+import {
+  Identities,
+  Wallets,
+  SecureNotes,
+  Devices,
+  Addons,
+} from './components';
+import { LicenseInfo } from '@material-ui/x-grid';
+
+LicenseInfo.setLicenseKey(
+  'bf57be20472e85bfdfef0d081e052e6dT1JERVI6MTg2MjEsRVhQSVJZPTE2MzY1MzA2OTUwMDAsS0VZVkVSU0lPTj0x',
+);
 
 const useStyles = makeStyles(theme => ({
   pagePaddingTop: {
@@ -33,27 +37,22 @@ const AppView = () => {
 
   return (
     <div>
-      {/* <div className={classes.shape}>
-        <Section className={classes.pagePaddingTop}>
-          <Hero />
-        </Section>
-        <Section className={classes.sectionNoPaddingTop}>
-          <SubHero />
-        </Section>
-      </div>
-      <Section narrow>
-        <OpenSource data={{ items: [], team: [] }} />
-      </Section>
-      <SectionAlternate>
-        <Token />
-      </SectionAlternate>
-      <Section innerNarrowed>
-        <Pricings />
-      </Section>
       <Section>
-        <Download data={[]} />
+        <Identities />
       </Section>
-      <Divider /> */}
+      <Section className={classes.sectionNoPaddingTop}>
+        <Wallets />
+      </Section>
+      <Section className={classes.sectionNoPaddingTop}>
+        <SecureNotes />
+      </Section>
+      <Section className={classes.sectionNoPaddingTop}>
+        <Devices />
+      </Section>
+      <Divider />
+      <SectionAlternate className={classes.sectionNoPaddingTop}>
+        <Addons />
+      </SectionAlternate>
     </div>
   );
 };
