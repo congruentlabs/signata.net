@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(12, 0),
     },
-    background: theme.palette.background.footer,
+    background: theme.palette.primary.dark,
   },
   footerContainer: {
     maxWidth: theme.layout.contentWidth,
@@ -146,10 +146,6 @@ const Footer = props => {
               </ListItem>
             </List>
           </Grid>
-          {/* <Grid item xs={12} md={10} className={classes.menuListContainer}>
-            <Grid container spacing={0}>
-            </Grid>
-          </Grid> */}
         </Grid>
       </div>
     </div>

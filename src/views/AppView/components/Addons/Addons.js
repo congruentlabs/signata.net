@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography, colors } from '@material-ui/core';
+import {
+  useMediaQuery,
+  Grid,
+  Typography,
+  colors,
+  Button,
+} from '@material-ui/core';
+import { Icon, LearnMoreLink } from 'components/atoms';
 import { IconAlternate, SectionHeader } from 'components/molecules';
-import { DescriptionListIcon, Section } from 'components/organisms';
+import { DescriptionListIcon, Section, CardPricingStandard } from 'components/organisms';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() => ({
@@ -24,6 +31,10 @@ const Addons = ({ className, ...rest }) => {
     defaultMatches: true,
   });
 
+  const onClickCloudUpgrade = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={className} {...rest}>
       <Section className={classes.noPadding}>
@@ -35,7 +46,52 @@ const Addons = ({ className, ...rest }) => {
       </Section>
       <Section className={classes.noPadding}>
         <Grid container spacing={2}>
-
+          <Grid item xs={4}>
+            <CardPricingStandard
+              liftUp
+              title="Cloud Backup"
+              subtitle="Keep your data safe"
+              priceComponent={(
+                <>
+                  <Typography
+                    variant="h4"
+                    component="span"
+                    style={{ fontWeight: 900 }}
+                  >
+                    20 SATA
+                  </Typography>
+                  <Typography
+                    component="span"
+                    variant="subtitle1"
+                  >
+                    / YEAR
+                </Typography>
+                </>
+              )}
+              features={[
+                'Encrypted Data Backup',
+                'Zero-Knowledge Storage',
+                'Enhanced Support',
+              ]}
+              featureCheckComponent={
+                <Icon
+                  fontIconClass="far fa-check-circle"
+                  fontIconColor={theme.palette.secondary.main}
+                />
+              }
+              cta={
+                <Button
+                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  onClick={onClickCloudUpgrade}
+                >
+                  Upgrade Now
+                </Button>
+              }
+            />
+          </Grid>
         </Grid>
       </Section>
     </div>

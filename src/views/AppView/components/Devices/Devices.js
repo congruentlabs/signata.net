@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 const Devices = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [devices, setDevices] = useLocalStorageState('devices', []);
+  const [devices, setDevices, isPersistent] = useLocalStorageState('devices', []);
 
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -69,7 +69,7 @@ const Devices = ({ className, ...rest }) => {
                 variant={devices.length < 1 ? "contained" : "outlined"}
                 fullWidth
               >
-                Add New Device
+                Add Device
               </Button>
             </CardBase>
           </Grid>

@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 const Wallets = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [wallets, setWallets] = useLocalStorageState('wallets', []);
+  const [wallets, setWallets, isPersistent] = useLocalStorageState('wallets', []);
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -70,7 +70,7 @@ const Wallets = ({ className, ...rest }) => {
                 variant={wallets.length < 1 ? "contained" : "outlined"}
                 fullWidth
               >
-                Add New Wallet
+                Add Wallet
               </Button>
             </CardBase>
           </Grid>

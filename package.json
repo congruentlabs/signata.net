@@ -45,7 +45,7 @@
     "dogecore": "^0.15.0",
     "ethereumjs-util": "^7.1.0",
     "ethereumjs-wallet": "^1.0.1",
-    "ethers": "^5.4.4",
+    "ethers": "^5.4.5",
     "history": "^5.0.1",
     "i18next": "^20.4.0",
     "jarallax": "^1.12.7",

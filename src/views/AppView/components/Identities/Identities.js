@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 const Identities = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [identities, setIdentities] = useLocalStorageState('identities', []);
+  const [identities, setIdentities, isPersistent] = useLocalStorageState('identities', []);
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -69,7 +69,7 @@ const Identities = ({ className, ...rest }) => {
                 variant={identities.length < 1 ? "contained" : "outlined"}
                 fullWidth
               >
-                Add New Identity
+                Add Identity
               </Button>
             </CardBase>
           </Grid>
