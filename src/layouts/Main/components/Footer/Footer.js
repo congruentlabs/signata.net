@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(12, 0),
     },
-    background: theme.palette.primary.dark,
+    background: theme.palette.common.black,
   },
   footerContainer: {
     maxWidth: theme.layout.contentWidth,

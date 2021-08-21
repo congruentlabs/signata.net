@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { format } from 'date-fns';
 import {
   useMediaQuery,
   Grid,
@@ -9,9 +8,6 @@ import {
   colors,
   Button,
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 import { IconAlternate, SectionHeader } from 'components/molecules';
 import { CardPricingStandard, CardBase, Section } from 'components/organisms';
 import { useTranslation } from 'react-i18next';
@@ -27,10 +23,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Wallets = ({ className, ...rest }) => {
+const Config = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [wallets, setWallets] = useLocalStorageState('wallets', []);
+  // use this component to detect persistence to warn the user if storage is in-memory or not
+  const [config, setConfig, isPersistent] = useLocalStorageState('config', []);
+
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -38,19 +36,23 @@ const Wallets = ({ className, ...rest }) => {
 
   return (
     <div className={className} {...rest}>
-      <Section className={classes.noPadding}>
+      {/* Popup window to show config */}
+
+      {/* <Section className={classes.noPadding}>
         <SectionHeader
-          title="Wallets"
-          subtitle="Create or import your existing wallets to protect in Signata."
+          title="Devices"
+          subtitle={''}
           align="left"
         />
-      </Section><Section className={classes.noPadding}>
+      </Section>
+      <Section className={classes.noPadding}>
         <Grid container spacing={2}>
-          {wallets.map((wallet) => (
-            <Grid key={wallet.id} item xs={12} md={4}>
+          {devices.map((device) => (
+            <Grid key={device.id} item xs={12} md={4}>
               <CardPricingStandard
-                title={wallet.name}
-                subtitle={wallet.type}
+                title="Device"
+                subtitle={device.type}
+                disclaimer={device.serialNumber}
                 cta={(
                   <Button
                     color="primary"
@@ -67,24 +69,24 @@ const Wallets = ({ className, ...rest }) => {
             <CardBase>
               <Button
                 color="secondary"
-                variant={wallets.length < 1 ? "contained" : "outlined"}
+                variant={devices.length < 1 ? "contained" : "outlined"}
                 fullWidth
               >
-                Add Wallet
+                Add Device
               </Button>
             </CardBase>
           </Grid>
         </Grid>
-      </Section>
+      </Section> */}
     </div>
   );
 };
 
-Wallets.propTypes = {
+Config.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
 };
 
-export default Wallets;
+export default Config;

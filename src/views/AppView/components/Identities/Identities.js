@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 const Identities = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [identities, setIdentities, isPersistent] = useLocalStorageState('identities', []);
+  const [identities, setIdentities] = useLocalStorageState('identities', []);
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,

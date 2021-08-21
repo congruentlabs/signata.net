@@ -25,7 +25,7 @@ const SecureNotes = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const [secureNotes, setSecureNotes, isPersistent] = useLocalStorageState('secureNotes', []);
+  const [secureNotes, setSecureNotes] = useLocalStorageState('secureNotes', []);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });

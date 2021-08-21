@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 const Devices = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [devices, setDevices, isPersistent] = useLocalStorageState('devices', []);
+  const [devices, setDevices] = useLocalStorageState('devices', []);
 
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
