@@ -60,6 +60,14 @@ const Hero = props => {
                 href="/download"
               >
                 Download Now
+              </Button>,
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                href="/app"
+              >
+                Open the App
               </Button>
             ]}
             align="left"

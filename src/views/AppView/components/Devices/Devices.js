@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Devices = ({ className, ...rest }) => {
+const Devices = ({ className, disabled, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [devices, setDevices] = useLocalStorageState('devices', []);
@@ -68,6 +68,7 @@ const Devices = ({ className, ...rest }) => {
                 color="secondary"
                 variant={devices.length < 1 ? "contained" : "outlined"}
                 fullWidth
+                disabled={disabled}
               >
                 Add Device
               </Button>

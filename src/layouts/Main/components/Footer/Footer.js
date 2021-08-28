@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(12, 0),
     },
-    background: theme.palette.common.black,
+    background: "#002A44",
   },
   footerContainer: {
     maxWidth: theme.layout.contentWidth,
@@ -115,7 +115,7 @@ const Footer = props => {
                   href="https://twitter.com/signatasupport"
                   target="_blank"
                   alt="Signata Support Twitter"
-                  color="primary"
+                  color="secondary"
                 > 
                   <Icon size="small" fontIconClass="fab fa-twitter" color={colors.blue} />
                 </IconButton>
@@ -123,7 +123,7 @@ const Footer = props => {
                   href="https://github.com/congruentlabs"
                   target="_blank"
                   alt="Congruent Labs Github"
-                  color="primary"
+                  color="secondary"
                 > 
                   <Icon size="small" fontIconClass="fab fa-github" color={colors.blue} />
                 </IconButton>
@@ -131,7 +131,7 @@ const Footer = props => {
                   href="https://blog.congruentlabs.co/"
                   target="_blank"
                   alt="Company Blog"
-                  color="primary"
+                  color="secondary"
                 > 
                   <Icon size="small" fontIconClass="fas fa-rss" color={colors.blue} />
                 </IconButton>
@@ -139,7 +139,7 @@ const Footer = props => {
                   href="https://www.linkedin.com/company/congruent-labs-pty-ltd/"
                   target="_blank"
                   alt="Company LinkedIn"
-                  color="primary"
+                  color="secondary"
                 > 
                   <Icon size="small" fontIconClass="fab fa-linkedin" color={colors.blue} />
                 </IconButton>

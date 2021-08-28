@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { format } from 'date-fns';
 import {
   useMediaQuery,
   Grid,
-  Typography,
-  colors,
   Button,
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import { IconAlternate, SectionHeader } from 'components/molecules';
+import { SectionHeader } from 'components/molecules';
 import { CardPricingStandard, CardBase, Section } from 'components/organisms';
 import { useTranslation } from 'react-i18next';
 import useLocalStorageState from 'use-local-storage-state';
@@ -27,24 +21,47 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Wallets = ({ className, ...rest }) => {
+const Wallets = ({ className, disabled, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const [showManageWallet, setShowManageWallet] = React.useState(false);
+  const [walletToManage, setWalletToManage] = React.useState(undefined);
+  const [showAddWallet, setShowAddWallet] = React.useState(false);
   const [wallets, setWallets] = useLocalStorageState('wallets', []);
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
 
+  const handleClickManageWallet = (e, wallet) => {
+    e.preventDefault();
+    setWalletToManage(wallet);
+    setShowManageWallet(true);
+  };
+
+  const handleClickAddWallet = (e) => {
+    e.preventDefault();
+    setShowAddWallet(true);
+  };
+
   return (
     <div className={className} {...rest}>
+      {showManageWallet && walletToManage && (
+        <></>
+      )}
+
+      {showAddWallet && (
+        <></>
+      )}
+
       <Section className={classes.noPadding}>
         <SectionHeader
           title="Wallets"
           subtitle="Create or import your existing wallets to protect in Signata."
           align="left"
         />
-      </Section><Section className={classes.noPadding}>
+      </Section>
+      <Section className={classes.noPadding}>
         <Grid container spacing={2}>
           {wallets.map((wallet) => (
             <Grid key={wallet.id} item xs={12} md={4}>
@@ -55,6 +72,7 @@ const Wallets = ({ className, ...rest }) => {
                   <Button
                     color="primary"
                     variant="contained"
+                    onClick={(e) => handleClickManageWallet(e, wallet)}
                     fullWidth
                   >
                     Manage
@@ -68,7 +86,9 @@ const Wallets = ({ className, ...rest }) => {
               <Button
                 color="secondary"
                 variant={wallets.length < 1 ? "contained" : "outlined"}
+                onClick={handleClickAddWallet}
                 fullWidth
+                disabled={disabled}
               >
                 Add Wallet
               </Button>

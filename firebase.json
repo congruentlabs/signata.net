@@ -1,6 +1,6 @@
 {
   "hosting": [{
-    "site": "sata-ico",
+    "site": "signata-production",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -15,7 +15,7 @@
     ]
   },
   {
-    "site": "sata-dev",
+    "site": "signata-dev",
     "public": "build",
     "ignore": [
       "firebase.json",

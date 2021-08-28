@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SecureNotes = ({ className, ...rest }) => {
+const SecureNotes = ({ className, disabled, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -63,6 +63,7 @@ const SecureNotes = ({ className, ...rest }) => {
                 color="secondary"
                 variant={secureNotes.length < 1 ? "contained" : "outlined"}
                 fullWidth
+                disabled={disabled}
               >
                 Add Secure Note
               </Button>

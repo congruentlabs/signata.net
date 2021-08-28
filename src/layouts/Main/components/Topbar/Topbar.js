@@ -163,17 +163,6 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
       <div className={classes.flexGrow} />
       <Hidden smDown>
         <List disablePadding className={classes.navigationContainer}>
-          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-            <Button
-              className={classes.listItemText}
-              component="a"
-              href="/app"
-              variant="contained"
-              color="primary"
-            >
-              App
-            </Button>
-          </ListItem>
           <ListItem
             aria-describedby="lang"
             onClick={e => handleClick(e, "lang")}

@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Identities = ({ className, ...rest }) => {
+const Identities = ({ className, disabled, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [identities, setIdentities] = useLocalStorageState('identities', []);
@@ -68,6 +68,7 @@ const Identities = ({ className, ...rest }) => {
                 color="secondary"
                 variant={identities.length < 1 ? "contained" : "outlined"}
                 fullWidth
+                disabled={disabled}
               >
                 Add Identity
               </Button>

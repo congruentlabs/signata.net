@@ -8,8 +8,10 @@ import {
   SecureNotes,
   Devices,
   Addons,
+  Setup,
 } from './components';
 import { LicenseInfo } from '@material-ui/x-grid';
+import useLocalStorageState from 'use-local-storage-state';
 
 LicenseInfo.setLicenseKey(
   'bf57be20472e85bfdfef0d081e052e6dT1JERVI6MTg2MjEsRVhQSVJZPTE2MzY1MzA2OTUwMDAsS0VZVkVSU0lPTj0x',
@@ -35,23 +37,53 @@ const useStyles = makeStyles(theme => ({
 const AppView = () => {
   const classes = useStyles();
 
+  const [setupMode, setSetupMode] = React.useState(false);
+  const [config, setConfig, isPersistent] = useLocalStorageState('config', []);
+  const [initialSetup, setInitialSetup] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log(config);
+    if (!config || config.length < 1) {
+      setSetupMode(true);
+    }
+  }, [config]);
+
   return (
     <div>
+      {setupMode && (
+        <SectionAlternate>
+          <Setup
+            config={config}
+            setConfig={setConfig}
+            isPersistent={isPersistent}
+          />
+        </SectionAlternate>
+      )}
       <Section>
-        <Identities />
+        <Identities
+          disabled={setupMode}
+        />
       </Section>
       <Section className={classes.sectionNoPaddingTop}>
-        <Wallets />
+        <Wallets
+          disabled={setupMode}
+        />
       </Section>
       <Section className={classes.sectionNoPaddingTop}>
-        <SecureNotes />
+        <SecureNotes
+          disabled={setupMode}
+        />
       </Section>
       <Section className={classes.sectionNoPaddingTop}>
-        <Devices />
+        <Devices
+          disabled={setupMode}
+        />
       </Section>
       <Divider />
       <SectionAlternate className={classes.sectionNoPaddingTop}>
-        <Addons />
+        <Addons
+          disabled={setupMode}
+        />
       </SectionAlternate>
     </div>
   );

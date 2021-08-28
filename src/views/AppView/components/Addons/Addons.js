@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Addons = ({ className, ...rest }) => {
+const Addons = ({ className, disabled, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -86,6 +86,7 @@ const Addons = ({ className, ...rest }) => {
                   fullWidth
                   size="large"
                   onClick={onClickCloudUpgrade}
+                  disabled={disabled}
                 >
                   Upgrade Now
                 </Button>

@@ -84,8 +84,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "deploy": "react-scripts build && firebase deploy --only hosting:sata-ico",
-    "deploy-dev": "react-scripts build && firebase deploy --only hosting:sata-dev",
+    "deploy": "react-scripts build && firebase deploy --only hosting:signata-production",
+    "deploy-dev": "react-scripts build && firebase deploy --only hosting:signata-dev",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
