@@ -21,11 +21,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SecureNotes = ({ className, disabled, ...rest }) => {
+const SecureNotes = ({ className, disabled, secureNotes, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const [secureNotes, setSecureNotes] = useLocalStorageState('secureNotes', []);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });

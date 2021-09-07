@@ -23,10 +23,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Devices = ({ className, disabled, ...rest }) => {
+const Devices = ({ className, disabled, devices, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [devices, setDevices] = useLocalStorageState('devices', []);
 
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {

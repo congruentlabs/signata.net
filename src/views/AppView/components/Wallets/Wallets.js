@@ -21,13 +21,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Wallets = ({ className, disabled, ...rest }) => {
+const Wallets = ({ className, disabled, wallets, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [showManageWallet, setShowManageWallet] = React.useState(false);
   const [walletToManage, setWalletToManage] = React.useState(undefined);
   const [showAddWallet, setShowAddWallet] = React.useState(false);
-  const [wallets, setWallets] = useLocalStorageState('wallets', []);
   const { t } = useTranslation();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,

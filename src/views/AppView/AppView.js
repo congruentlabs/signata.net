@@ -8,7 +8,8 @@ import {
   SecureNotes,
   Devices,
   Addons,
-  Setup,
+  AppSetup,
+  FirstDeviceSetup,
 } from './components';
 import { LicenseInfo } from '@material-ui/x-grid';
 import useLocalStorageState from 'use-local-storage-state';
@@ -38,13 +39,21 @@ const AppView = () => {
   const classes = useStyles();
 
   const [setupMode, setSetupMode] = React.useState(false);
+  const [firstDeviceSetup, setFirstDeviceSetupMode] = React.useState(false);
   const [config, setConfig, isPersistent] = useLocalStorageState('config', []);
-  const [initialSetup, setInitialSetup] = React.useState(false);
+  const [wallets, setWallets] = useLocalStorageState('wallets', []);
+  const [identities, setIdentities] = useLocalStorageState('identities', []);
+  const [devices, setDevices] = useLocalStorageState('devices', []);
+  const [secureNotes, setSecureNotes] = useLocalStorageState('secureNotes', []);
 
   React.useEffect(() => {
     console.log(config);
-    if (!config || config.length < 1) {
+    // if a seedHash is present, then they've set up their account already, so close the setup section
+    if (config && !config.seedHash) {
       setSetupMode(true);
+    }
+    if (config && !config.firstDeviceSetup) {
+      setFirstDeviceSetupMode(true);
     }
   }, [config]);
 
@@ -52,39 +61,64 @@ const AppView = () => {
     <div>
       {setupMode && (
         <SectionAlternate>
-          <Setup
+          <AppSetup
             config={config}
             setConfig={setConfig}
             isPersistent={isPersistent}
           />
         </SectionAlternate>
       )}
-      <Section>
-        <Identities
-          disabled={setupMode}
-        />
-      </Section>
-      <Section className={classes.sectionNoPaddingTop}>
-        <Wallets
-          disabled={setupMode}
-        />
-      </Section>
-      <Section className={classes.sectionNoPaddingTop}>
-        <SecureNotes
-          disabled={setupMode}
-        />
-      </Section>
-      <Section className={classes.sectionNoPaddingTop}>
-        <Devices
-          disabled={setupMode}
-        />
-      </Section>
-      <Divider />
-      <SectionAlternate className={classes.sectionNoPaddingTop}>
-        <Addons
-          disabled={setupMode}
-        />
-      </SectionAlternate>
+      {!setupMode && firstDeviceSetup && (
+        <SectionAlternate>
+          <FirstDeviceSetup
+            devices={devices}
+            setDevices={setDevices}
+            config={config}
+          />
+        </SectionAlternate>
+      )}
+      {!setupMode && !firstDeviceSetup && (
+        <>
+          <Section>
+            <Identities
+              disabled={setupMode || firstDeviceSetup}
+              identities={identities}
+              setIdentities={setIdentities}
+              config={config}
+            />
+          </Section>
+          <Section className={classes.sectionNoPaddingTop}>
+            <Wallets
+              disabled={setupMode || firstDeviceSetup}
+              wallets={wallets}
+              setWallets={setWallets}
+              config={config}
+            />
+          </Section>
+          <Section className={classes.sectionNoPaddingTop}>
+            <SecureNotes
+              disabled={setupMode || firstDeviceSetup}
+              secureNotes={secureNotes}
+              setSecureNotes={setSecureNotes}
+              config={config}
+            />
+          </Section>
+          <Section className={classes.sectionNoPaddingTop}>
+            <Devices
+              disabled={setupMode}
+              devices={devices}
+              setDevices={setDevices}
+              config={config}
+            />
+          </Section>
+          <Divider />
+          <SectionAlternate className={classes.sectionNoPaddingTop}>
+            <Addons
+              disabled={setupMode || firstDeviceSetup}
+            />
+          </SectionAlternate>
+        </>
+      )}
     </div>
   );
 };

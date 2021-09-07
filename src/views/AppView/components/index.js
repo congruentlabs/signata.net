@@ -3,4 +3,5 @@ export { default as Devices } from './Devices';
 export { default as Identities } from './Identities';
 export { default as SecureNotes } from './SecureNotes';
 export { default as Wallets } from './Wallets';
-export { default as Setup } from './Setup';
+export { AppSetup } from './Setup';
+export { FirstDeviceSetup } from './Setup';
