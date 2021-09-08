@@ -3,33 +3,34 @@ import PropTypes from 'prop-types';
 import forge from 'node-forge';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import {
-  useMediaQuery,
-  Grid,
-  Typography,
-  TextField,
   Button,
-  Checkbox,
-  // Box,
   ButtonGroup,
-  Step,
-  Stepper,
-  StepLabel,
-  Radio,
+  Checkbox,
   FormControl,
-  LinearProgress,
-  // FormLabel,
-  RadioGroup,
   FormControlLabel,
+  Grid,
+  LinearProgress,
+  Radio,
+  RadioGroup,
+  Step,
+  StepLabel,
+  Stepper,
+  TextField,
+  Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 import { Section } from 'components/organisms';
 import { useTranslation } from 'react-i18next';
+import AddIcon from '@material-ui/icons/Add';
+import ImportExportIcon from '@material-ui/icons/ImportExport';
 import {
   generateMnemonic,
   validateMnemonic,
   mnemonicToSeedSync,
 } from 'bip39';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import { RefreshRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   fontWeight900: {
@@ -56,13 +57,18 @@ const modalStyle = {
 };
 
 
-const AppSetup = ({ className, config, setConfig, isPersistent }) => {
+const AppSetup = ({
+  className,
+  config,
+  setConfig,
+  isPersistent,
+  recoveryPassphrase,
+  setRecoveryPassphrase,
+  importRecoveryPassphrase,
+  setImportRecoveryPassphrase,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
-  // use this component to detect persistence to warn the user if storage is in-memory or not
-  const [recoveryPassphrase, setRecoveryPassphrase] = useState(generateMnemonic());
-  const [importRecoveryPassphrase, setImportRecoveryPassphrase] = useState('');
-  const [wordCount, setWordCount] = useState('12');
   const [setupMode, setSetupMode] = useState('create');
   const [firstConfirm, setFirstConfirm] = useState(false);
   const [secondConfirm, setSecondConfirm] = useState(false);
@@ -105,9 +111,11 @@ const AppSetup = ({ className, config, setConfig, isPersistent }) => {
     try {
       setLoading(true);
       setErrorMessage(undefined);
+
       const isValid = validateMnemonic(importRecoveryPassphrase.toLowerCase());
       const seed = mnemonicToSeedSync(importRecoveryPassphrase).toString('hex');
       const computedHash = forge.util.bytesToHex(forge.pkcs5.pbkdf2(seed, '', 10000, 512));
+
       if (isValid) {
         setConfig({ ...config, seedHash: computedHash });
       } else {
@@ -217,6 +225,7 @@ const AppSetup = ({ className, config, setConfig, isPersistent }) => {
                   <Grid item xs={12}>
                     <ButtonGroup
                       fullWidth
+                      size="large"
                       color="secondary"
                       orientation={isMd ? "horizontal" : "vertical"}
                     >
@@ -224,6 +233,7 @@ const AppSetup = ({ className, config, setConfig, isPersistent }) => {
                         variant="outlined"
                         onClick={handleClickGenerate}
                         disabled={isLoading}
+                        startIcon={<RefreshRounded />}
                       >
                         Generate
                       </Button>
@@ -231,6 +241,7 @@ const AppSetup = ({ className, config, setConfig, isPersistent }) => {
                         variant="contained"
                         type="submit"
                         disabled={!firstConfirm || !secondConfirm || isLoading}
+                        startIcon={<AddIcon />}
                       >
                         Create Account
                       </Button>
@@ -268,8 +279,10 @@ const AppSetup = ({ className, config, setConfig, isPersistent }) => {
                       variant="contained"
                       color="secondary"
                       type="submit"
+                      size="large"
                       fullWidth
                       disabled={isLoading}
+                      startIcon={<ImportExportIcon />}
                     >
                       Import Account
                     </Button>

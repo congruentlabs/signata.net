@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from 'components/molecules';
 import { Section } from 'components/organisms';
+import AddIcon from '@material-ui/icons/Add';
 import { useTranslation } from 'react-i18next';
 import {
   Step,
@@ -77,6 +78,7 @@ const Setup = ({ className }) => {
               size="large"
               variant="contained"
               onClick={handleClickAddFirstDevice}
+              startIcon={<AddIcon />}
             >
               Add First Device
             </Button>

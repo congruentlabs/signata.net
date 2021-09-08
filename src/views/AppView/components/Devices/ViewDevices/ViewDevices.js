@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Devices = ({ className, disabled, devices, ...rest }) => {
+const ViewDevices = ({ className, disabled, devices, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -79,11 +79,11 @@ const Devices = ({ className, disabled, devices, ...rest }) => {
   );
 };
 
-Devices.propTypes = {
+ViewDevices.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
 };
 
-export default Devices;
+export default ViewDevices;

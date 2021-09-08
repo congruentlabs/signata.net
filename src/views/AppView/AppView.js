@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { colors, Divider } from '@material-ui/core';
 import { Section, SectionAlternate } from 'components/organisms';
 import {
-  Identities,
-  Wallets,
-  SecureNotes,
-  Devices,
-  Addons,
+  ViewAddons,
   AppSetup,
+  ViewDevices,
+  AddDevice,
+  ManageDevice,
+  AddIdentity,
+  ManageIdentity,
+  AddWallet,
+  ManageWallet,
+  AddSecureNote,
+  ManageSecureNote,
   FirstDeviceSetup,
+  AddCloudAddon,
+  Identities,
+  SecureNotes,
+  Wallets,
 } from './components';
 import { LicenseInfo } from '@material-ui/x-grid';
 import useLocalStorageState from 'use-local-storage-state';
@@ -38,13 +47,27 @@ const useStyles = makeStyles(theme => ({
 const AppView = () => {
   const classes = useStyles();
 
-  const [setupMode, setSetupMode] = React.useState(false);
-  const [firstDeviceSetup, setFirstDeviceSetupMode] = React.useState(false);
+  const [setupMode, setSetupMode] = useState(false);
+  const [firstDeviceSetup, setFirstDeviceSetupMode] = useState(false);
+  const [recoveryPassphrase, setRecoveryPassphrase] = useState('');
+  const [importRecoveryPassphrase, setImportRecoveryPassphrase] = useState('');
+
+  // use this component to detect persistence to warn the user if storage is in-memory or not
   const [config, setConfig, isPersistent] = useLocalStorageState('config', []);
   const [wallets, setWallets] = useLocalStorageState('wallets', []);
   const [identities, setIdentities] = useLocalStorageState('identities', []);
   const [devices, setDevices] = useLocalStorageState('devices', []);
   const [secureNotes, setSecureNotes] = useLocalStorageState('secureNotes', []);
+
+  const [showAddDevice, setShowAddDevice] = useState(false);
+  const [showAddWallet, setShowAddWallet] = useState(false);
+  const [showAddIdentity, setShowAddIdentity] = useState(false);
+  const [showAddSecureNote, setShowAddSecureNote] = useState(false);
+  const [showAddCloudAddon, setShowAddCloudAddon] = useState(false);
+  const [showManageDevice, setShowManageDevice] = useState(false);
+  const [showManageWallet, setShowManageWallet] = useState(false);
+  const [showManageIdentity, setShowManageIdentity] = useState(false);
+  const [showManageSecureNote, setShowManageSecureNote] = useState(false);
 
   React.useEffect(() => {
     console.log(config);
@@ -59,12 +82,43 @@ const AppView = () => {
 
   return (
     <div>
+      {showAddDevice && (
+        <AddDevice />
+      )}
+      {showManageDevice && (
+        <ManageDevice />
+      )}
+      {showAddIdentity && (
+        <AddIdentity />
+      )}
+      {showManageIdentity && (
+        <ManageIdentity />
+      )}
+      {showAddWallet && (
+        <AddWallet />
+      )}
+      {showManageWallet && (
+        <ManageWallet />
+      )}
+      {showAddSecureNote && (
+        <AddSecureNote />
+      )}
+      {showManageSecureNote && (
+        <ManageSecureNote />
+      )}
+      {showAddCloudAddon && (
+        <AddCloudAddon />
+      )}
       {setupMode && (
         <SectionAlternate>
           <AppSetup
             config={config}
             setConfig={setConfig}
             isPersistent={isPersistent}
+            recoveryPassphrase={recoveryPassphrase}
+            setRecoveryPassphrase={setRecoveryPassphrase}
+            importRecoveryPassphrase={importRecoveryPassphrase}
+            setImportRecoveryPassphrase={setImportRecoveryPassphrase}
           />
         </SectionAlternate>
       )}
@@ -74,47 +128,57 @@ const AppView = () => {
             devices={devices}
             setDevices={setDevices}
             config={config}
+            setShowAddDevice={setShowAddDevice}
           />
         </SectionAlternate>
       )}
       {!setupMode && !firstDeviceSetup && (
         <>
           <Section>
-            <Identities
+            <ViewIdentities
               disabled={setupMode || firstDeviceSetup}
               identities={identities}
               setIdentities={setIdentities}
               config={config}
+              setShowAddIdentity={setShowAddIdentity}
+              setShowManageIdentity={setShowManageIdentity}
             />
           </Section>
           <Section className={classes.sectionNoPaddingTop}>
-            <Wallets
+            <ViewWallets
               disabled={setupMode || firstDeviceSetup}
               wallets={wallets}
               setWallets={setWallets}
               config={config}
+              setShowAddWallet={setShowAddWallet}
+              setShowManageWallet={setShowManageWallet}
             />
           </Section>
           <Section className={classes.sectionNoPaddingTop}>
-            <SecureNotes
+            <ViewSecureNotes
               disabled={setupMode || firstDeviceSetup}
               secureNotes={secureNotes}
               setSecureNotes={setSecureNotes}
               config={config}
+              setShowAddSecureNote={setShowAddSecureNote}
+              setShowManageSecureNote={setShowManageSecureNote}
             />
           </Section>
           <Section className={classes.sectionNoPaddingTop}>
-            <Devices
+            <ViewDevices
               disabled={setupMode}
               devices={devices}
               setDevices={setDevices}
               config={config}
+              setShowAddDevice={setShowAddDevice}
+              setShowManageDevice={setShowManageDevice}
             />
           </Section>
           <Divider />
           <SectionAlternate className={classes.sectionNoPaddingTop}>
-            <Addons
+            <ViewAddons
               disabled={setupMode || firstDeviceSetup}
+              setShowAddCloudAddon={setShowAddCloudAddon}
             />
           </SectionAlternate>
         </>
