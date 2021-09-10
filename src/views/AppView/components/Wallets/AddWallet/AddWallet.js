@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  Grid,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+  TextField,
+} from '@material-ui/core';
+import {
+  Alert,
+  AlertTitle,
+} from '@material-ui/lab';
 
 import {
   supportedAddressTypes,
@@ -21,7 +25,7 @@ import {
   generateName,
 } from '../../utils';
 
-const AddAddressView = (props) => {
+const AddWallet = (props) => {
   const {
     onClose,
     isLoading,
@@ -233,7 +237,7 @@ const AddAddressView = (props) => {
   );
 };
 
-AddAddressView.propTypes = {
+AddWallet.propTypes = {
   onClose: PropTypes.func,
   isLoading: PropTypes.bool,
   onSubmitAddAddress: PropTypes.func,
@@ -241,4 +245,4 @@ AddAddressView.propTypes = {
   errorMessages: PropTypes.array,
 };
 
-export default AddAddressView;
+export default AddWallet;

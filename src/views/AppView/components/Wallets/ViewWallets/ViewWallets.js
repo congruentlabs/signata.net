@@ -9,7 +9,6 @@ import {
 import { SectionHeader } from 'components/molecules';
 import { CardPricingStandard, CardBase, Section } from 'components/organisms';
 import { useTranslation } from 'react-i18next';
-import useLocalStorageState from 'use-local-storage-state';
 
 const useStyles = makeStyles(() => ({
   fontWeight900: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Wallets = ({ className, disabled, wallets, ...rest }) => {
+const ViewWallets = ({ className, disabled, wallets, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [showManageWallet, setShowManageWallet] = React.useState(false);
@@ -99,11 +98,11 @@ const Wallets = ({ className, disabled, wallets, ...rest }) => {
   );
 };
 
-Wallets.propTypes = {
+ViewWallets.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
 };
 
-export default Wallets;
+export default ViewWallets;

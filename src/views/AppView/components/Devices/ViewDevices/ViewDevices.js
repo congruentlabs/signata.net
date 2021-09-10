@@ -23,22 +23,34 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ViewDevices = ({ className, disabled, devices, ...rest }) => {
+const ViewDevices = ({ className, disabled, devices, setDevices, config, setShowAddDevice, setShowManageDevice, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
   const { t } = useTranslation();
+
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
+  const handleClickAddDevice = (e) => {
+    e.preventDefault();
+    setShowAddDevice(true);
+  };
+
+  const handleClickManageDevice = (e) => {
+    e.preventDefault();
+    setShowManageDevice(true);
+  };
+
 
   return (
     <div className={className} {...rest}>
       <Section className={classes.noPadding}>
         <SectionHeader
-          title="Devices"
-          subtitle={''}
           align="left"
+          title={t('Devices')}
+          // subtitle={t('')}
         />
       </Section>
       <Section className={classes.noPadding}>
@@ -46,7 +58,7 @@ const ViewDevices = ({ className, disabled, devices, ...rest }) => {
           {devices.map((device) => (
             <Grid key={device.id} item xs={12} md={4}>
               <CardPricingStandard
-                title="Device"
+                title={t('Device')}
                 subtitle={device.type}
                 disclaimer={device.serialNumber}
                 cta={(
@@ -54,8 +66,9 @@ const ViewDevices = ({ className, disabled, devices, ...rest }) => {
                     color="primary"
                     variant="contained"
                     fullWidth
+                    onClick={handleClickManageDevice}
                   >
-                    Manage
+                    {t('Manage Device')}
                   </Button>
                 )}
               />
@@ -68,8 +81,9 @@ const ViewDevices = ({ className, disabled, devices, ...rest }) => {
                 variant={devices.length < 1 ? "contained" : "outlined"}
                 fullWidth
                 disabled={disabled}
+                onClick={handleClickAddDevice}
               >
-                Add Device
+                {t('Add Device')}
               </Button>
             </CardBase>
           </Grid>

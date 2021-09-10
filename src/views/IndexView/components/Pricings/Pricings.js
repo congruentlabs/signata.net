@@ -6,6 +6,7 @@ import { useMediaQuery, Grid, Typography, Button } from '@material-ui/core';
 import { Icon, LearnMoreLink } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
 import { CardPricingStandard } from 'components/organisms';
+import { GetApp, Launch } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   fontWeight900: {
@@ -67,6 +68,7 @@ const Pricings = props => {
                 fullWidth
                 size="large"
                 href="/download"
+                startIcon={<GetApp />}
               >
                 Download Now
               </Button>
@@ -112,8 +114,9 @@ const Pricings = props => {
                 fullWidth
                 size="large"
                 href="/download"
+                startIcon={<Launch />}
               >
-                Subscribe now
+                Get Started
               </Button>
             }
           />

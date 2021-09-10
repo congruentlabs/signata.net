@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { colors, Divider } from '@material-ui/core';
 import { Section, SectionAlternate } from 'components/organisms';
@@ -8,17 +8,17 @@ import {
   ViewDevices,
   AddDevice,
   ManageDevice,
-  AddIdentity,
-  ManageIdentity,
-  AddWallet,
-  ManageWallet,
-  AddSecureNote,
-  ManageSecureNote,
+  // AddIdentity,
+  // ManageIdentity,
+  // ViewIdentities,
+  // AddWallet,
+  // ManageWallet,
+  // ViewWallets,
+  // AddSecureNote,
+  // ManageSecureNote,
+  // ViewSecureNotes,
   FirstDeviceSetup,
   AddCloudAddon,
-  Identities,
-  SecureNotes,
-  Wallets,
 } from './components';
 import { LicenseInfo } from '@material-ui/x-grid';
 import useLocalStorageState from 'use-local-storage-state';
@@ -69,7 +69,7 @@ const AppView = () => {
   const [showManageIdentity, setShowManageIdentity] = useState(false);
   const [showManageSecureNote, setShowManageSecureNote] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(config);
     // if a seedHash is present, then they've set up their account already, so close the setup section
     if (config && !config.seedHash) {
@@ -80,32 +80,39 @@ const AppView = () => {
     }
   }, [config]);
 
+  const handleCloseAddDevice = (e) => {
+    e.preventDefault();
+    setShowAddDevice(false);
+  }
+
   return (
     <div>
       {showAddDevice && (
-        <AddDevice />
+        <AddDevice
+          onClose={handleCloseAddDevice}
+        />
       )}
       {showManageDevice && (
         <ManageDevice />
       )}
-      {showAddIdentity && (
+      {/* {showAddIdentity && (
         <AddIdentity />
       )}
       {showManageIdentity && (
         <ManageIdentity />
-      )}
-      {showAddWallet && (
+      )} */}
+      {/* {showAddWallet && (
         <AddWallet />
       )}
       {showManageWallet && (
         <ManageWallet />
-      )}
-      {showAddSecureNote && (
+      )} */}
+      {/* {showAddSecureNote && (
         <AddSecureNote />
       )}
       {showManageSecureNote && (
         <ManageSecureNote />
-      )}
+      )} */}
       {showAddCloudAddon && (
         <AddCloudAddon />
       )}
@@ -125,16 +132,13 @@ const AppView = () => {
       {!setupMode && firstDeviceSetup && (
         <SectionAlternate>
           <FirstDeviceSetup
-            devices={devices}
-            setDevices={setDevices}
-            config={config}
             setShowAddDevice={setShowAddDevice}
           />
         </SectionAlternate>
       )}
       {!setupMode && !firstDeviceSetup && (
         <>
-          <Section>
+          {/* <Section>
             <ViewIdentities
               disabled={setupMode || firstDeviceSetup}
               identities={identities}
@@ -143,8 +147,8 @@ const AppView = () => {
               setShowAddIdentity={setShowAddIdentity}
               setShowManageIdentity={setShowManageIdentity}
             />
-          </Section>
-          <Section className={classes.sectionNoPaddingTop}>
+          </Section> */}
+          {/* <Section className={classes.sectionNoPaddingTop}>
             <ViewWallets
               disabled={setupMode || firstDeviceSetup}
               wallets={wallets}
@@ -153,8 +157,8 @@ const AppView = () => {
               setShowAddWallet={setShowAddWallet}
               setShowManageWallet={setShowManageWallet}
             />
-          </Section>
-          <Section className={classes.sectionNoPaddingTop}>
+          </Section> */}
+          {/* <Section className={classes.sectionNoPaddingTop}>
             <ViewSecureNotes
               disabled={setupMode || firstDeviceSetup}
               secureNotes={secureNotes}
@@ -163,7 +167,7 @@ const AppView = () => {
               setShowAddSecureNote={setShowAddSecureNote}
               setShowManageSecureNote={setShowManageSecureNote}
             />
-          </Section>
+          </Section> */}
           <Section className={classes.sectionNoPaddingTop}>
             <ViewDevices
               disabled={setupMode}

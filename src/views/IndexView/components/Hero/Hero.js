@@ -4,6 +4,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Grid, Button, Typography } from '@material-ui/core';
 import { Image } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
+import { GetApp, Launch } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   image: {
@@ -58,6 +59,7 @@ const Hero = props => {
                 color="secondary"
                 size="large"
                 href="/download"
+                startIcon={<GetApp />}
               >
                 Download Now
               </Button>,
@@ -66,6 +68,7 @@ const Hero = props => {
                 color="secondary"
                 size="large"
                 href="/app"
+                startIcon={<Launch />}
               >
                 Open the App
               </Button>

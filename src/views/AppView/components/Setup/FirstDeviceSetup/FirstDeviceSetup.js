@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Setup = ({ className }) => {
+const FirstDeviceSetup = ({ className, setShowAddDevice }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -39,7 +39,7 @@ const Setup = ({ className }) => {
 
   const handleClickAddFirstDevice = (e) => {
     e.preventDefault();
-    console.log('add device');
+    setShowAddDevice(true);
   };
 
   return (
@@ -89,11 +89,11 @@ const Setup = ({ className }) => {
   );
 };
 
-Setup.propTypes = {
+FirstDeviceSetup.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
 };
 
-export default Setup;
+export default FirstDeviceSetup;

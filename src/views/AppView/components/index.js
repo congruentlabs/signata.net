@@ -13,9 +13,9 @@ export { ViewSecureNotes } from './SecureNotes';
 export { AddSecureNote } from './SecureNotes';
 export { ManageSecureNote } from './SecureNotes';
 
-export { ViewWallets } from './Wallets';
-export { AddWallet } from './Wallets';
-export { ManageWallet } from './Wallets';
+// export { ViewWallets } from './Wallets';
+// export { AddWallet } from './Wallets';
+// export { ManageWallet } from './Wallets';
 
 export { AppSetup } from './Setup';
 export { FirstDeviceSetup } from './Setup';

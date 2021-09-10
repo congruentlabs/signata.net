@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Toolbar,
-  Button,
   Hidden,
   List,
   ListItem,
@@ -16,6 +15,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Image, DarkModeToggler } from 'components/atoms'
 import { useTranslation } from 'react-i18next';
+// import { Language } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   flexGrow: {
@@ -171,6 +171,9 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
               openedPopoverId === "lang" ? classes.listItemActive : '',
             )}
           >
+            {/* <ListItemIcon>
+              <Language />
+            </ListItemIcon> */}
             <Typography
               variant="body1"
               color="textPrimary"
@@ -222,6 +225,9 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
             openedPopoverId === "lang" ? classes.listItemActive : '',
           )}
         >
+          {/* <ListItemIcon>
+            <Language />
+          </ListItemIcon> */}
           <Typography
             variant="body1"
             color="textPrimary"

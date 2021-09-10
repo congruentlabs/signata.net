@@ -146,6 +146,12 @@ const AppSetup = ({
             <StepLabel>Set Up First Device</StepLabel>
           </Step>
         </Stepper>
+        {errorMessage && (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {errorMessage}
+          </Alert>
+        )}
       </Section>
       <Section className={classes.noPaddingTop}>
         <Grid container spacing={2}>
