@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
 import forge from 'node-forge';
+import fernet from 'fernet';
 
 const { pki, asn1 } = forge;
 
@@ -326,6 +327,48 @@ export const pbkdf2Hash = (dataToHash, salt = '', numIterations = 10000) => Cryp
   keySize: 512 / 32,
   iterations: numIterations,
 }).toString();
+
+/**
+ * 
+ * @param {*} secret 
+ * @param {*} plainText 
+ * @returns 
+ */
+export const fernetEncrypt = (secret, plainText) => new Promise((resolve, reject) => {
+  try {
+    const fernetToken = new fernet.Token({
+      secret: secret,
+      time: new Date(),
+      iv: [],
+    });
+    const cipherText = fernetToken.encode(plainText);
+
+    resolve(cipherText);
+  } catch (error) {
+    reject(error);
+  }
+});
+
+/**
+ * 
+ * @param {*} secret 
+ * @param {*} token 
+ * @returns 
+ */
+export const fernetDecrypt = (secret, token) => new Promise((resolve, reject) => {
+  try {
+    const fernetToken = new fernet.Token({
+      secret: secret,
+      token: token,
+      ttl: 0,
+    });
+    const plainText = fernetToken.decode();
+
+    resolve(plainText);
+  } catch (error) {
+    reject(error);
+  }
+});
 
 /**
  * Encrypts data with AES-CBC, deriving a PBKDF2 key from the provided passphrase
